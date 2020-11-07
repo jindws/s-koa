@@ -41,7 +41,7 @@ class SKOA{
         return function (ctx){
             function dispatch(i){
                 let fn = middlewares[i]
-                if(!middlewares)return Promise.resolve()
+                if(!fn)return Promise.resolve()
                 return Promise.resolve(fn(ctx,function next(){
                    return dispatch(i+1)
                 }))
