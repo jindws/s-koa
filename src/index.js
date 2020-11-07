@@ -2,20 +2,29 @@
 const Koa = require('../skoa/index.ts')
 const app = new Koa()
 
-// app.use((ctx,next)=>{
-//     console.log(1)
-//     next()
-//     console.log(2)
-// })
-//
-// app.use((ctx,next)=>{
-//     console.log(11)
-//     next()
-// })
+const delay = ()=>new Promise(resolve=>setTimeout(()=>resolve(),2000))
 
-app.use((ctx)=>{
+app.use(async(ctx,next)=>{
+    ctx.body = '1'
+    console.log(1)
+    await next()
+    ctx.body += 5
+    console.log(5)
+})
+
+app.use(async(ctx,next)=>{
+    ctx.body += 2;
+    console.log(2)
+    await delay(3000)//无效
+    await next()
+    ctx.body += 4
+    console.log(4)
+})
+
+app.use(async(ctx)=>{
     ctx.status = 201;
-    ctx.body = 'hello skoa'
+    ctx.body += 3
+    console.log(3)
 })
 
 app.listen(3000,()=>{
