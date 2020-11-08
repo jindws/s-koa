@@ -2,10 +2,13 @@
 const Koa = require('../skoa/index.ts')
 // const Router = require('koa-router')
 const Router = require('../skoa/router.ts')
+const Static = require('../skoa/static.ts')
 const app = new Koa()
 const router = new Router()
 
-router.get('/test',async ctx=>ctx.body = 'get test')
+router.get('/test',async ctx=>{
+    ctx.body = 'get test'
+})
 router.post('/test',async ctx=>ctx.body = 'post test')
 
 // const delay = ()=>new Promise(resolve=>setTimeout(()=>resolve(),2000))
@@ -33,6 +36,7 @@ router.post('/test',async ctx=>ctx.body = 'post test')
 //     console.log(3)
 // })
 app.use(router.routes())
+app.use(Static('./public'))
 app.listen(3000,()=>{
     console.log('listen 3000')
 })
