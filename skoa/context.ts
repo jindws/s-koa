@@ -1,21 +1,20 @@
-module.exports = {
-    set body(val){
-        this.response.body = val
+export default {
+    set body(val: string) {
+        this.response.body = val;
     },
-    get body(){
-        return this.response.body
+    get body() {
+        return this.response.body;
     },
     get status() {
         return this.response.status;
     },
-    set status(val){
-        this.response.status = val
+    set status(val) {
+        this.response.status = val;
     },
-    get method(){
-        return this.request.method
+    get method(): string {
+        return this.request.method;
     },
-    get url(){
-        return this.request.url
+    get url(): string {
+        return this.request.url;
     },
-
-}
+};
